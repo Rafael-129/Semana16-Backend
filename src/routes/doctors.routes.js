@@ -10,6 +10,7 @@ router.get('/', doctorController.getAll);
 router.get('/:id', doctorController.getById);
 
 // Rutas protegidas (Admin only)
+router.post('/complete', authMiddleware, roleCheck(ROLES.ADMIN), doctorController.createComplete);
 router.post('/', authMiddleware, roleCheck(ROLES.ADMIN), doctorController.create);
 router.put('/:id', authMiddleware, roleCheck(ROLES.ADMIN), doctorController.update);
 router.delete('/:id', authMiddleware, roleCheck(ROLES.ADMIN), doctorController.delete);
