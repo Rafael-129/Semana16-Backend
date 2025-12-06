@@ -36,13 +36,12 @@ const doctorController = {
 
       // Generar contraseña por defecto (puede cambiarla después)
       const defaultPassword = 'Doctor123!';
-      const hashedPassword = await bcrypt.hash(defaultPassword, 10);
 
-      // Crear usuario con rol doctor
+      // Crear usuario con rol doctor (el hook beforeCreate hasheará la contraseña)
       const user = await User.create({
         fullName,
         email,
-        password: hashedPassword,
+        password: defaultPassword, // Se enviará en texto plano y el hook la hasheará
         phone,
         role: 'doctor'
       });
